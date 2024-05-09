@@ -1,11 +1,13 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 from werkzeug.utils import secure_filename
 import os
+import json
 UPLOAD_FOLDER = 'TestUpload'
 ALLOWED_EXTENSIONS = {'csv'}
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 subjectList = []
+finalJson = {}
 class Subject():
     def __init__(self, subjectName, subjectId):
         self.subjectName = subjectName
@@ -16,12 +18,18 @@ class Subject():
     def addMissed(self,hours):
         self.missedLectureHours+=hours
         self.totalHours+= hours
+
     def addAttended(self,hours):
-        self.attendedLectureHours+=hours    
+        self.attendedLectureHours+= hours    
         self.totalHours += hours
+        print(self.totalHours)
+
     def calcMissedPercentage(self):
-        percentage = (self.attendedLectureHours / self.totalHours) * 100
-        return percentage
+        if self.totalHours > 0:
+            percentage = (self.attendedLectureHours / self.totalHours) * 100
+            return percentage
+        else:
+            return -1
     def compareName(self,inputName):
         if (self.subjectName == inputName):
             return(True)
@@ -33,54 +41,54 @@ class Subject():
         else:
             return(False)
     def returnReport(self):
-        return (f"{self.subjectName} - {self.calcMissedPercentage()}")
+        return ([self.subjectName, self.calcMissedPercentage()])
+
 def processFile(file):
-    counter = -1
     path = f"TestUpload/{file}"
-    file = open(path, 'r').readlines()
-    for x in file:
-        instanceData = {
-            "Present" : False,
-            "SubName" : "",
-            "SubId" : "",
-            "HourAmmount" : 0,
-        }
-        x.replace('"','')
-        mainList = x.split(',')
-        count = 0
-        for entity in mainList:
-            count+=1
-            if count == 2:
-                if entity == "Authorised":
-                    instanceData['Present'] = True
-            if count == 5:
-                fullName = entity
-                nameList = fullName.strip().split('|')
-                if len(subjectList) == 0:
-                    sub = Subject(fullName[1],fullName[0])
+    with open(path, 'r') as f:
+        next(f)  # Skip the first line
+        for line in f:
+            instanceData = {
+                "Present": False,
+                "subCreated": False,
+                "HourAmount": 0,
+                "Subindex" : -1
+            }
+            line = line.replace('"', '').rstrip('\n')
+            mainList = line.split(',')
+            if mainList[1] == "Authorised":
+                instanceData['Present'] = True
+            
+            nameList = mainList[4].strip().split('|')
+            if not subjectList:  # Checking if subjectList is empty
+                sub = Subject(nameList[1], nameList[0])
+                subjectList.append(sub)
+                instanceData['SubFound'] = nameList[1]
+                instanceData['SubId'] = nameList[0]
+                instanceData['Subindex'] = 0
+            else:
+                found = False
+                index = -1
+                for name in subjectList:
+                    index += 1
+                    if name.compareName(nameList[1]) == True:
+                        instanceData['Subindex'] = index
+                        found = True
+                        break
+
+                if not found:  # If the name was not found in subjectList
+                    sub = Subject(nameList[1], nameList[0])
                     subjectList.append(sub)
-                    instanceData['SubFound'] = fullName[1]
-                    instanceData['SubId'] = fullName[0]
-                else:
-                    for name in subjectList:
-                        res = name.compareName(fullName[1])
-                        if res == False:
-                            sub = Subject(fullName[1],fullName[0])
-                            subjectList.append(sub)
-                            instanceData['SubName'] = fullName[1]
-                            instanceData['SubId'] = fullName[0]
-
-                if count == 9:
-                    instanceData['HourAmmount'] = int(entity)
-                    for subject in subjectList:
-                        if subject.compareName(instanceData['SubName']) == True and subject.compareId(instanceData['SubId']) == True:
-                            if instanceData['Present'] == True:
-                                subject.addAttended(instanceData['HourAmmount'])
-                            else:
-                                subject.addMissed(instanceData['HourAmmount'])
-        for subject in subjectList:
-            print(f"{subject.returnReport()}")
-
+                    instanceData['SubName'] = nameList[1]
+                    instanceData['SubId'] = nameList[0]
+                    instanceData['Subindex'] = len(subjectList)-1
+            instanceData['HourAmount'] = int(line[9])
+            if instanceData['Present']:
+                subjectList[instanceData['Subindex']].addAttended(instanceData['HourAmount'])
+            else:
+                subjectList[instanceData['Subindex']].addMissed(instanceData['HourAmount'])
+    for x in subjectList:
+        print(x.returnReport())
 def processRow(row):
     counter = 0
     for x in row:
