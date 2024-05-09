@@ -10,9 +10,9 @@
 </head>
 <body>
     <h1>File input test</h1>
-    <form>
-        <label for="fi">File Input</label>
-        <input type="file" id="fi">
-    </form>
+    <form method=post enctype=multipart/form-data action="http://localhost:5000/fileHandle">
+        <input type=file name=file>
+        <input type=submit value=Upload>
+      </form>
 </body>
 </html>
