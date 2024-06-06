@@ -1,10 +1,16 @@
-
+import Navbar from "./navbar";
 export default function Home() {
+  
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    
+    <main>
+     
+     <Navbar/>
+
       <div>
         <h1>Test</h1>
       </div>
+
     </main>
   );
 }
