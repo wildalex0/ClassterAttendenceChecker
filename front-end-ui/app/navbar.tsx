@@ -2,7 +2,7 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
-
+import About from "./about";
 export default function Navbar() {
     
         const [nav, setNav] = useState(false);
@@ -16,14 +16,14 @@ export default function Navbar() {
             {
                 id: 2,
                 name: "About Us",
-                link: "about"
+                link: "./about.tsx"
             }
         ];
    
     
   return (
     
-    <div className="flex justify-between items-center w-full h-20 px-4 text-white">
+    <div className="flex justify-between items-center bg-[#121212] w-full h-20 px-4 text-white">
     <div>
       <h1 className="text-3xl  ml-2">
         <a
@@ -38,12 +38,12 @@ export default function Navbar() {
     </div>
 
     <ul className="hidden md:flex">
-      {links.map(({ id, name, link }) => (
+      {links.map((item, index) => (
         <li
-          key={id}
+          key={item.id}
           className="nav-links px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 hover:text-white duration-200 link-underline"
         >
-          <Link href={link}>{name}</Link>
+          <Link href={item.link}>{item.name}</Link>
         </li>
       ))}
     </ul>
