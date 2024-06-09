@@ -1,5 +1,5 @@
-import Navbar from "./navbar";
-export default function Home() {
+import Navbar from "../navbar";
+export default function About() {
   
   return (
     
@@ -8,7 +8,7 @@ export default function Home() {
      <Navbar/>
 
       <div>
-        <h1>Test</h1>
+        <h1>About Me</h1>
       </div>
 
     </main>
