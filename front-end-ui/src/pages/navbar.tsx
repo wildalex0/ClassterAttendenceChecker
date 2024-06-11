@@ -2,7 +2,7 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
-import About from './about/page'
+import About from './about'
 export default function Navbar() {
     
         const [nav, setNav] = useState(false);
@@ -16,7 +16,7 @@ export default function Navbar() {
             {
                 id: 2,
                 name: "About Us",
-                link: "about",
+                link: "/about",
             }
         ];
    
