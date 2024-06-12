@@ -128,8 +128,15 @@ def setInstanceCounter():
 def checkFolderStruct():
     currentPath = os.path.dirname(os.path.abspath(__file__))
     for x in  folderList:
-        if(os.path.exists(os.path.join(os.path.dirname(os.path.abspath(__file__)), x))):
-            pass
+        testPath = os.path.join(os.path.dirname(os.path.abspath(__file__)), x)
+        if(os.path.exists(testPath)):
+            files = os.listdir(testPath)
+            for file in files:
+                file_path = os.path.join(testPath, file)
+                
+                # Check if it's a file before deleting
+                if os.path.isfile(file_path):
+                    os.remove(file_path)
         else:
             print(f"File Not Found")
             os.mkdir(os.path.join(currentPath, x))
