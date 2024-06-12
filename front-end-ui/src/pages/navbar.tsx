@@ -11,7 +11,7 @@ export default function Navbar() {
             {
                 id:  1,
                 name: "Home",
-                link: "",
+                link: "/",
             },
             {
                 id: 2,
@@ -57,13 +57,13 @@ export default function Navbar() {
 
     {nav && (
       <ul className="flex flex-col justify-center items-center absolute top-0 left-0 w-full h-screen bg-gradient-to-b from-black to-gray-800 text-gray-500">
-        {links.map(({ id, link }) => (
+        {links.map((item, index) => (
           <li
-            key={id}
+            key={item.id}
             className="px-4 cursor-pointer capitalize py-6 text-4xl"
           >
-            <Link onClick={() => setNav(!nav)} href={link}>
-              {link}
+            <Link onClick={() => setNav(!nav)} href={item.link}>
+              {item.name}
             </Link>
           </li>
         ))}

@@ -1,7 +1,16 @@
-
-export default function Launch() {
+import Navbar from "./navbar";
+export default function Home() {
   
   return (
-    <h1>meow</h1>
+    
+    <main>
+     
+     <Navbar/>
+
+      <div>
+        <h1>Test</h1>
+      </div>
+
+    </main>
   );
 }
