@@ -4,11 +4,12 @@ import os
 import json
 import datetime
 from math import floor
-UPLOAD_FOLDER = 'TestUpload'
+UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), "TestUpload")
 ALLOWED_EXTENSIONS = {'csv'}
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 subjectList = []
+folderList = ["AttendencePerDate", "TestUpload"]
 finalJson = {}
 class Subject():
     def __init__(self, subjectName, subjectId):
@@ -45,11 +46,11 @@ class Subject():
         return ([self.subjectName, floor(self.calcMissedPercentage())])
 def writeReport():
     date = datetime.datetime.now()
-    path = f"AttendencePerDate/{date.day}-{date.month}-{date.year}-{readInstanceCounter()}.json"
+    path = f"{os.path.join(os.path.dirname(os.path.abspath(__file__)))}/AttendencePerDate/{date.day}-{date.month}-{date.year}-{readInstanceCounter()}.json"
     json.dump(finalJson,open(path,'w'),indent=6)
     
 def processFile(file):
-    path = f"TestUpload/{file}"
+    path = f"{app.config['UPLOAD_FOLDER']}/{file}"
     with open(path, 'r') as f:
         next(f)  # Skip the first line
         for line in f:
@@ -103,10 +104,20 @@ def processRow(row):
         counter += 1
         print(f"{counter} - {z}")
 def readInstanceCounter():
-    f = open('instanceCounter.txt','r')
-    fileCont = int(f.read())
-    f.close()
-    return fileCont
+    path =  os.path.join(os.path.dirname(os.path.abspath(__file__)),'instanceCounter.txt')
+    try:
+        f = open(path,'r')
+        fileCont = int(f.read())
+        f.close()
+        return fileCont
+    except FileNotFoundError:
+        f = open(path,'w')
+        fileCont = int(f.write("0"))
+        f.close()
+        return fileCont
+        
+
+    
 def setInstanceCounter():
     fileCont = readInstanceCounter()
     print(f"{fileCont} - {type(fileCont)}")
@@ -114,13 +125,22 @@ def setInstanceCounter():
     fileCont = str(fileCont)
     open('instanceCounter.txt','w').write(fileCont)
     return fileCont
+def checkFolderStruct():
+    currentPath = os.path.dirname(os.path.abspath(__file__))
+    for x in  folderList:
+        if(os.path.exists(os.path.join(os.path.dirname(os.path.abspath(__file__)), x))):
+            pass
+        else:
+            print(f"File Not Found")
+            os.mkdir(os.path.join(currentPath, x))
+    return (True)
 @app.route('/fileAPI',methods=['GET','POST'])
 def returnJSON():
     return finalJson
-
 @app.route('/result', methods=['GET','POST'])
 def mainProcessingAPI():
     if request.method == 'POST':
+        checkFolderStruct()
         # check if the post request has the file part
         if 'file' not in request.files:
             flash('No file part')
