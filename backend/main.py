@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash
+from flask import Flask, render_template, request, flash, redirect, make_response
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
 import os
@@ -163,7 +163,9 @@ def mainProcessingAPI():
 
             return render_template('result.html')
         else:
-             return render_template('error.html'), {"Refresh": "3; url=http://localhost:5000/"}
+            response = make_response(redirect("http://localhost:3000/error"))
+            response.headers["Refresh"] = "3; url=http://localhost:3000"
+            return response
 
 def allowed_file(filename):
     return '.' in filename and \

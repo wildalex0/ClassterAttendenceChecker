@@ -7,8 +7,7 @@ export default function About() {
     <main>
      
      <Navbar/>
-
-      <div>
+     <div className="container mx-auto">
         <h1>About Me</h1>
       </div>
     <FooterSection/>

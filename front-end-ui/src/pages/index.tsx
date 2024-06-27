@@ -28,6 +28,10 @@ function handleDrop(event: React.DragEvent<HTMLDivElement>){
 function handleDragover(event: React.DragEvent<HTMLDivElement>){
   event.preventDefault();
 }
+
+function handleFormInput(){
+
+}
   return (
     
     <main>
@@ -55,7 +59,7 @@ function handleDragover(event: React.DragEvent<HTMLDivElement>){
                     <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Click to upload</span> or drag and drop</p>
                     <p className="text-xs text-gray-500 dark:text-gray-400">.CSV only</p>
                 </div>
-                <input id="dropzone-file" type="file" className="" onInput={(event) => handleUpload(event)}/>
+                <input id="dropzone-file" name="file" type="file" className="" onInput={(event) => handleUpload(event)}/>
             </label>
         </div> 
       <p className="mb-4"><span className="font-semibold">Selected file:</span> {uploadName}</p>
