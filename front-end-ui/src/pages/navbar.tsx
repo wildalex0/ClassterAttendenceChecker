@@ -23,16 +23,19 @@ export default function Navbar() {
     
   return (
     
-    <div className="flex justify-between items-center bg-[#121212] w-full h-20 px-4 text-white">
+    <div className=" bg-[#121212] w-full p-4 text-white ">
+      <div className="container mx-auto flex justify-between items-center">
+        
+     
     <div>
-      <h1 className="text-3xl  ml-2">
+      <h1 className="text-3xl">
         <a
           className="link-underline link-underline-black"
-          href=""
-          target="_blank"
+          href="/"
+          target=""
           rel="noreferrer"
         >
-          Logo
+          Meow
         </a>
       </h1>
     </div>
@@ -69,6 +72,7 @@ export default function Navbar() {
         ))}
       </ul>
     )}
+     </div>
   </div>
   );
     };
