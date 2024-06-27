@@ -27,3 +27,17 @@ body {
     text-wrap: balance;
   }
 }
+
+.footerPos {
+  position: absolute;
+  /* Ensure it covers the full width and stays at the bottom */
+  bottom: 0;
+}
+
+@media (max-width: 768px) {
+  .footerPos {
+      position: sticky;
+      /* Stick the footer to the bottom */
+      bottom: 0;
+  }
+}

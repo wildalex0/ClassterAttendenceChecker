@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, flash
+from flask_cors import CORS
 from werkzeug.utils import secure_filename
 import os
 import json
@@ -7,6 +8,8 @@ from math import floor
 UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), "TestUpload")
 ALLOWED_EXTENSIONS = {'csv'}
 app = Flask(__name__)
+CORS(app)
+app.secret_key = 'your_secret_key_here' 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 subjectList = []
 folderList = ["AttendencePerDate", "TestUpload"]
