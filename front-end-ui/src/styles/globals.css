@@ -17,9 +17,12 @@
 }
 
 body {
+  height: 100%;
   color: rgb(var(--foreground-rgb));
   background:
     rgb(var(--background-start-rgb));
+    display: flex;
+    flex-direction: column;
 }
 
 @layer utilities {
@@ -28,16 +31,4 @@ body {
   }
 }
 
-.footerPos {
-  position: absolute;
-  /* Ensure it covers the full width and stays at the bottom */
-  bottom: 0;
-}
 
-@media (max-width: 768px) {
-  .footerPos {
-      position: sticky;
-      /* Stick the footer to the bottom */
-      bottom: 0;
-  }
-}

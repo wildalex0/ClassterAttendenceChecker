@@ -10,7 +10,6 @@ export default function About() {
      <div className="container mx-auto">
         <h1>About Me</h1>
       </div>
-    <FooterSection/>
     </main>
   );
 }

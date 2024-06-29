@@ -55,7 +55,7 @@ export default function Navbar() {
       </div>
 
       {nav && (
-        <ul className="relative bg-[#121212] w-full left-0 flex flex-col items-start p-4 md:hidden">
+        <ul className="relative bg-[#121212] w-full left-0 flex flex-col items-start pt-4 md:hidden">
           {links.map((item) => (
             <li
               key={item.id}

@@ -24,7 +24,6 @@ export default function About() {
      <div className="container mx-auto">
         <p>Seems like you've entered the wrong file type.</p>
       </div>
-    <FooterSection/>
     </main>
   );
 }

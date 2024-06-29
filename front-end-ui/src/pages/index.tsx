@@ -42,7 +42,7 @@ function handleError(){
 }
   return (
     
-    <main>
+    <main className="mainContent">
      
      <Navbar/>
 
@@ -78,7 +78,6 @@ function handleError(){
       <p className="italic py-4 ">To Add: Dynamic Customisation to CSV reading, IE: <span className="font-bold">Setting rows read dynamically.</span>.</p>
       </div>
       </div>
-      <FooterSection/>
     </main>
   );
 }
