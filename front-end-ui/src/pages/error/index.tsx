@@ -10,7 +10,7 @@ export default function About() {
     })
 
     async function onloadRed(){
-        await delay(2000);
+        await delay(1500);
         window.location.replace("http://localhost:3000");    
     }
     function delay(ms: number) {
@@ -22,7 +22,7 @@ export default function About() {
      
      <Navbar/>
      <div className="container mx-auto">
-        <h1>ERROR</h1>
+        <p>Seems like you've entered the wrong file type.</p>
       </div>
     <FooterSection/>
     </main>

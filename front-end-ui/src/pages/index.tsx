@@ -8,29 +8,37 @@ export default function Home() {
   
   function handleUpload(event: any){
     const file = event.target.files[0]; 
-    if (file) {
-    const fileName = file.name;
-    setUpload(true);
-    setUploadName(fileName);
-  } 
-}
+    if (!handleFile(file)){
+      handleError();
+    }
+
+  }
 
 function handleDrop(event: React.DragEvent<HTMLDivElement>){
   event.preventDefault();
   const file = event.dataTransfer.files?.[0];
-  if (file) {
-    const fileName = file.name;
-    setUpload(true);
-    setUploadName(fileName);
+  if (!handleFile(file)){
+    handleError();
   }
+
 }
 
 function handleDragover(event: React.DragEvent<HTMLDivElement>){
   event.preventDefault();
 }
 
-function handleFormInput(){
-
+function handleFile(file : File){
+  const fileName = file.name;
+  if(fileName.split('.')[1] == "csv"){
+    setUpload(true);
+    setUploadName(fileName);
+    return true;
+  }
+  return false;
+}
+function handleError(){
+  alert("Please Input a CSV file");
+  window.location.reload();
 }
   return (
     
@@ -59,14 +67,15 @@ function handleFormInput(){
                     <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Click to upload</span> or drag and drop</p>
                     <p className="text-xs text-gray-500 dark:text-gray-400">.CSV only</p>
                 </div>
-                <input id="dropzone-file" name="file" type="file" className="" onInput={(event) => handleUpload(event)}/>
+                <input id="dropzone-file" name="file" type="file" className="hidden" onInput={(event) => handleUpload(event)}/>
             </label>
         </div> 
       <p className="mb-4"><span className="font-semibold">Selected file:</span> {uploadName}</p>
        
       
-      <input type="submit" className={classNames("p-4 w-full border-2 rounded-lg  dark:border-gray-600  ",{ "text-gray-500 dark:bg-[#2e2e2e]":!uploaded, "cursor-pointer dark:hover:border-gray-500  dark:bg-[#212121] dark:hover:bg-[#121212]":uploaded}) } ></input>
+      <input type="submit" id="Sub" disabled={!uploaded} className={classNames("p-4 w-full border-2 rounded-lg  dark:border-gray-600  ",{ "text-gray-500 dark:bg-[#2e2e2e]":!uploaded, "cursor-pointer dark:hover:border-gray-500  dark:bg-[#212121] dark:hover:bg-[#121212] ":uploaded}) } ></input>
       </form>
+      <p className="italic py-4 ">To Add: Dynamic Customisation to CSV reading, IE: <span className="font-bold">Setting rows read dynamically.</span>.</p>
       </div>
       </div>
       <FooterSection/>

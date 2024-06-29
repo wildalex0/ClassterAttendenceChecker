@@ -144,6 +144,7 @@ def checkFolderStruct():
             print(f"File Not Found")
             os.mkdir(os.path.join(currentPath, x))
     return (True)
+
 @app.route('/fileAPI',methods=['GET','POST'])
 def returnJSON():
     return finalJson
@@ -156,12 +157,13 @@ def mainProcessingAPI():
             flash('No file part')
             return ('Please Enter A file')
         file = request.files['file']
+        print(file.filename)
         if file and allowed_file(file.filename):
             filename = f"{setInstanceCounter()}_{secure_filename(file.filename)}"
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             processFile(filename)
 
-            return render_template('result.html')
+            return redirect("http://localhost:3000/result")
         else:
             response = make_response(redirect("http://localhost:3000/error"))
             response.headers["Refresh"] = "3; url=http://localhost:3000"
