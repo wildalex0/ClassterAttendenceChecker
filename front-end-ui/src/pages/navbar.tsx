@@ -15,6 +15,11 @@ export default function Navbar() {
       id: 2,
       name: "About Us",
       link: "/about",
+    },
+    {
+      id: 3,
+      name: "Settings",
+      link: "/settings"
     }
   ];
 

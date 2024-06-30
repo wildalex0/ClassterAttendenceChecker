@@ -30,5 +30,13 @@ body {
     text-wrap: balance;
   }
 }
+.custom-number-input::-webkit-outer-spin-button,
+.custom-number-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 
+.custom-number-input[type='number'] {
+    -moz-appearance: textfield;
+}
 

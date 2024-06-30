@@ -148,7 +148,7 @@ def checkFolderStruct():
 @app.route('/fileAPI',methods=['GET','POST'])
 def returnJSON():
     return finalJson
-@app.route('/result', methods=['GET','POST'])
+@app.route('/api/result', methods=['GET','POST'])
 def mainProcessingAPI():
     if request.method == 'POST':
         checkFolderStruct()
@@ -175,7 +175,7 @@ def allowed_file(filename):
 
 @app.route('/', methods=['POST','GET'])
 def mainApp():
-    return render_template('index.html')
+    return redirect("http://localhost:3000/")
 
 if __name__ == '__main__':
     app.run(host='localhost',port=5000, debug=True)

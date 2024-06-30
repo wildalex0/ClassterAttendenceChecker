@@ -55,7 +55,7 @@ function handleError(){
         
         <div className="m-2">
 
-        <form action="http://localhost:5000/result" method="post" encType="multipart/form-data">
+        <form action="http://localhost:5000/api/result" method="post" encType="multipart/form-data">
 
           
         <div className="flex items-center justify-center w-full" onDrop={(event) =>handleDrop(event) } onDragOver={(event) => handleDragover(event)}>
