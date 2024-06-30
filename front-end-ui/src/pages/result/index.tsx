@@ -6,7 +6,7 @@ import { cookies } from 'next/headers'
 export default function Home() {
     const[subList, setSubList] = useState({});
     const[parseList, setParseList] = useState({});
-    const[cutoffCoef, setCutoff] = useState(80);
+    const[cutoffCoef, setCutoff] = useState(70);
     
     useEffect(() => {
     
@@ -15,7 +15,7 @@ export default function Home() {
         setSubList(data);
     })
     
-}), []
+}, [])
   
     function calcCutoff(val : string){
         const value = Number(val);

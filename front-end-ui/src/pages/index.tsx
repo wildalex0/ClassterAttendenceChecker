@@ -1,11 +1,19 @@
 import Navbar from "./navbar";
 import FooterSection from "./footer"
-import { useState } from "react";
+import {checkCoef} from "./cookieFunc";
+import { useState, useEffect } from "react";
 import classNames from "classnames";
+import { getCookies, getCookie, setCookie } from 'cookies-next';
+ 
 export default function Home() {
+
   const [uploaded, setUpload] = useState(false);
   const [uploadName, setUploadName] = useState("")
   
+  useEffect(() => {
+    console.log(cookieStarter().checkCoef())
+  }, [])
+
   function handleUpload(event: any){
     const file = event.target.files[0]; 
     if (!handleFile(file)){
