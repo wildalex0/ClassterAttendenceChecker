@@ -1,9 +1,8 @@
 import Navbar from "./navbar";
 import FooterSection from "./footer"
-import {checkCoef} from "./cookieFunc";
 import { useState, useEffect } from "react";
 import classNames from "classnames";
-import { getCookies, getCookie, setCookie } from 'cookies-next';
+import { getCookie, setCookie } from 'cookies-next';
  
 export default function Home() {
 
@@ -11,9 +10,19 @@ export default function Home() {
   const [uploadName, setUploadName] = useState("")
   
   useEffect(() => {
-    console.log(cookieStarter().checkCoef())
+  // Cookie Checker & Setter.
+    
+    baseCookieSet();
   }, [])
 
+  function baseCookieSet(){
+    //Coef Cookie
+    if (getCookie("ClassterAttendenceCoef") === undefined){
+      //Set Cookie
+      setCookie('ClassterAttendenceCoef','70');
+
+    }
+  }
   function handleUpload(event: any){
     const file = event.target.files[0]; 
     if (!handleFile(file)){

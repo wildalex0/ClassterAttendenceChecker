@@ -1,7 +1,7 @@
 import Navbar from "../navbar";
 import FooterSection from "../footer"
 import { useState, useEffect } from "react";
-import { cookies } from 'next/headers'
+import { getCookie, setCookie } from 'cookies-next';
 
 export default function Home() {
     const[subList, setSubList] = useState({});
@@ -9,14 +9,23 @@ export default function Home() {
     const[cutoffCoef, setCutoff] = useState(70);
     
     useEffect(() => {
-    
+        baseCookieSet()
         fetch("http://localhost:5000/fileAPI").then((response) => response.json())
     .then((data) => {
         setSubList(data);
     })
     
 }, [])
-  
+    function baseCookieSet(){
+        //Coef Cookie
+        if (getCookie("ClassterAttendenceCoef") === undefined){
+        //Set Cookie
+        setCookie('ClassterAttendenceCoef','70');
+        }else{
+            let num = Number(getCookie("ClassterAttendenceCoef"))
+            setCutoff(num);
+        }
+    }
     function calcCutoff(val : string){
         const value = Number(val);
         if (value > cutoffCoef){
@@ -53,4 +62,5 @@ export default function Home() {
       </div>
     </main>
   );
+
 }
