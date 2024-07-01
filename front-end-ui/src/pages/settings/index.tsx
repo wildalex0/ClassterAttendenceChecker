@@ -1,5 +1,5 @@
 import Navbar from "../navbar";
-import { useState, useEffect } from "react";
+import { useState, useEffect, SetStateAction, Dispatch } from "react";
 import { getCookie, setCookie } from "cookies-next";
 import FooterSection from "../footer";
 import classNames from "classnames";
@@ -8,34 +8,68 @@ export default function Home() {
   const [changes, setChanges] = useState(false);
   const [saveChanges, setSaveChanges] = useState(false)
   const [toastText, setToastText] = useState("Changes Saved");
+
+  const [authIndex, setAuthIndex] = useState(1);
+  const [hrsIndex, setHrsIndex] = useState(9); 
+  const [nameIndex, setNameIndex] = useState(4); 
+
   useEffect(() => {
-    console.log(saveChanges);
     baseCookieSet();
   }, []);
-
+  let cookieList = [
+    {
+      "name": "ClassterAttendenceCoef",
+      "baseVal" : "70",
+      "stateName" : setCutoff,
+      "stateVal" : cutoff
+    },
+    {
+      "name": "AuthIndex",
+      "baseVal" : "1",
+      "stateName" : setAuthIndex,
+      "stateVal" : authIndex
+    },
+    {
+      "name": "HrsIndex",
+      "baseVal" : "9",
+      "stateName" : setHrsIndex,
+      "stateVal" : hrsIndex
+    },
+    {
+      "name": "NameIndex",
+      "baseVal" : "4",
+      "stateName" : setNameIndex,
+      "stateVal" : nameIndex
+    },
+  ]
   function baseCookieSet() {
     //Coef Cookie
-    if (getCookie("ClassterAttendenceCoef") === undefined) {
-      //Set Cookie
-      setCookie("ClassterAttendenceCoef", "70");
-    } else {
-      let num = Number(getCookie("ClassterAttendenceCoef"));
-      setCutoff(num);
-    }
+    for(let x in cookieList){
+    
+      if (getCookie(cookieList[x].name) === undefined) {
+        //Set Cookie
+        console.log(cookieList[x].stateVal);
+        setCookie(cookieList[x].name, cookieList[x].stateVal);
+      } else {
+        let num = Number(getCookie(cookieList[x].name));
+        cookieList[x].stateName(num);
+      }
+  }
   }
   function handleCutoff(event: any) {
     const val = event.target.value;
     if (val > 100) {
-      setChanges(true);
       setCutoff(100);
     } else {
-      setChanges(true);
       setCutoff(val);
     }
+    setChanges(true);
   }
   function handleChanges() {
-    console.log(cutoff)
-    setCookie("ClassterAttendenceCoef", cutoff);
+    for(let x in cookieList){
+      console.log(cookieList[x].name+ "- "+cookieList[x].baseVal);
+      setCookie(cookieList[x].name, cookieList[x].baseVal);
+    }
     setChanges(false);
     setSaveChanges(true);
     onloadRed();
@@ -47,15 +81,17 @@ export default function Home() {
 }
 function resetDefaults(){
   setChanges(true);
-  setCutoff(70);
-  setToastText("Changes Reset")
+  for(let x in cookieList){
+    cookieList[x].stateName(Number(cookieList[x].baseVal));
+  }
+  setToastText("Changes Reset");
 
 }
-useEffect(() => {
-  if (cutoff === 70 && changes) {
-    handleChanges();
-  }
-}, [cutoff, changes]);
+function handleChange(event : any, parent : Dispatch<SetStateAction<number>>){
+  parent(Number(event.target.value));
+  
+}
+
 
 function delay(ms: number) {
     return new Promise( resolve => setTimeout(resolve, ms) );
@@ -80,9 +116,50 @@ function delay(ms: number) {
               placeholder={String(cutoff)}
             ></input>
           </div>
+          <div className="flex items-center justify-between my-2">
+            <label htmlFor="cutoffCoef-input" className="font-semibold">
+              Authorised Index
+            </label>
+            <input
+              id="authIndex-input"
+              name="authIndex-input"
+              type="number"
+              value={authIndex}
+              onChange={(event) => handleChange(event, setAuthIndex)}
+              className="custom-number-input px-4 py-2 border border-gray-600 rounded-md bg-gray-100 text-white focus:outline-none focus:border-white-500 focus:ring-1 focus:ring-white-500"
+              placeholder={String(cutoff)}
+            ></input>
+          </div>
+          <div className="flex items-center justify-between my-2">
+            <label htmlFor="cutoffCoef-input" className="font-semibold">
+              Name Index
+            </label>
+            <input
+              id="nameIndex-input"
+              name="nameIndex-input"
+              type="number"
+              value={nameIndex}
+              onChange={(event) => handleChange(event, setNameIndex)}
+              className="custom-number-input px-4 py-2 border border-gray-600 rounded-md bg-gray-100 text-white focus:outline-none focus:border-white-500 focus:ring-1 focus:ring-white-500"
+              placeholder={String(cutoff)}
+            ></input>
+          </div>
+          <div className="flex items-center justify-between my-2">
+            <label htmlFor="cutoffCoef-input" className="font-semibold">
+              Hours Index
+            </label>
+            <input
+              id="hrsIndex-input"
+              name="hrsIndex-input"
+              type="number"
+              value={hrsIndex}
+              onChange={(event) => handleChange(event, setHrsIndex)}
+              className="custom-number-input px-4 py-2 border border-gray-600 rounded-md bg-gray-100 text-white focus:outline-none focus:border-white-500 focus:ring-1 focus:ring-white-500"
+              placeholder={String(cutoff)}
+            ></input>
+          </div>
           <button
             id="save"
-            disabled={!changes}
             onClick={handleChanges}
             className={
               "mt-4 p-4 w-full border-2 rounded-lg  dark:border-gray-600 cursor-pointer dark:hover:border-gray-500  dark:bg-[#212121] dark:hover:bg-[#121212] "
