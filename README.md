@@ -2,4 +2,5 @@ Attendence Percentage Calculator. for Classter System. Can be used with other po
 
 Requires flask & next to host and run fully. Flask for API and Backend processing, next + tailwind for the frontend UI.
 
-By Alessandro Gatt
+Feel free to use this project as you will, there are potential bugs that might be present, so please let me know
+
