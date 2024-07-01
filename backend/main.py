@@ -56,6 +56,8 @@ def writeReport():
   
 def processFile(file):
     try:
+        print(mainArgs)
+
         path = f"{app.config['UPLOAD_FOLDER']}/{file}"
         with open(path, 'r') as f:
             next(f)  # Skip the first line
@@ -126,7 +128,14 @@ def readInstanceCounter():
         fileCont = int(f.write("0"))
         f.close()
         return fileCont
-        
+def appendArgs(args):
+    y = args.split('-')
+    tp = []
+    for x in y:
+        mainArgs.append(int(x))
+        mainArgs = tp
+    if(len(mainArgs) != 3):
+        mainArgs = [1,4,9]      
 
     
 def setInstanceCounter():
@@ -160,7 +169,7 @@ def returnJSON():
 def mainProcessingAPI():
     if request.method == 'POST':
         checkFolderStruct()
-        print(request.form['test05'])
+        #appendArgs(request.form['args'])
         # check if the post request has the file part
         if 'file' not in request.files:
             flash('No file part')

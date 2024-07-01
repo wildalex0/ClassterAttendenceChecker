@@ -8,20 +8,49 @@ export default function Home() {
 
   const [uploaded, setUpload] = useState(false);
   const [uploadName, setUploadName] = useState("")
-  
+  const [authIndex, setAuthIndex] = useState(1);
+  const [hrsIndex, setHrsIndex] = useState(9); 
+  const [nameIndex, setNameIndex] = useState(4); 
+
   useEffect(() => {
   // Cookie Checker & Setter.
     
     baseCookieSet();
   }, [])
 
-  function baseCookieSet(){
+  let cookieList = [
+    {
+      "name": "AuthIndex",
+      "baseVal" : "1",
+      "stateName" : setAuthIndex,
+      "stateVal" : authIndex
+    },
+    {
+      "name": "HrsIndex",
+      "baseVal" : "9",
+      "stateName" : setHrsIndex,
+      "stateVal" : hrsIndex
+    },
+    {
+      "name": "NameIndex",
+      "baseVal" : "4",
+      "stateName" : setNameIndex,
+      "stateVal" : nameIndex
+    },
+  ]
+  function baseCookieSet() {
     //Coef Cookie
-    if (getCookie("ClassterAttendenceCoef") === undefined){
-      //Set Cookie
-      setCookie('ClassterAttendenceCoef','70');
-
-    }
+    for(let x in cookieList){
+    
+      if (getCookie(cookieList[x].name) === undefined) {
+        //Set Cookie
+        console.log(cookieList[x].stateVal);
+        setCookie(cookieList[x].name, cookieList[x].stateVal);
+      } else {
+        let num = Number(getCookie(cookieList[x].name));
+        cookieList[x].stateName(num);
+      }
+  }
   }
   function handleUpload(event: any){
     const file = event.target.files[0]; 
@@ -89,7 +118,7 @@ function handleError(){
         </div> 
       <p className="mb-4"><span className="font-semibold">Selected file:</span> {uploadName}</p>
        
-      <input type="text" id="test05" name="test05" placeholder="Input Var"></input>
+      <input type="text" hidden id="args" name="args" placeholder="Input Var" value={authIndex+"-"+nameIndex+"-"+hrsIndex}></input>
       <input type="submit" id="Sub" disabled={!uploaded} className={classNames("p-4 w-full border-2 rounded-lg  dark:border-gray-600  ",{ "text-gray-500 dark:bg-[#2e2e2e]":!uploaded, "cursor-pointer dark:hover:border-gray-500  dark:bg-[#212121] dark:hover:bg-[#121212] ":uploaded}) } ></input>
       </form>
       <p className="italic py-4 ">To Add: Dynamic Customisation to CSV reading, IE: <span className="font-bold">Setting rows read dynamically.</span>.</p>

@@ -4,7 +4,7 @@ import { getCookie, setCookie } from "cookies-next";
 import FooterSection from "../footer";
 import classNames from "classnames";
 export default function Home() {
-  const [cutoff, setCutoff] = useState(0);
+  const [cutoff, setCutoff] = useState(70);
   const [changes, setChanges] = useState(false);
   const [saveChanges, setSaveChanges] = useState(false)
   const [toastText, setToastText] = useState("Changes Saved");
@@ -63,16 +63,17 @@ export default function Home() {
     } else {
       setCutoff(val);
     }
-    setChanges(true);
   }
   function handleChanges() {
     for(let x in cookieList){
-      console.log(cookieList[x].name+ "- "+cookieList[x].baseVal);
-      setCookie(cookieList[x].name, cookieList[x].baseVal);
+      console.log(cookieList[x].name+ "- "+cookieList[x].stateVal);
+      setCookie(cookieList[x].name, cookieList[x].stateVal);
     }
     setChanges(false);
     setSaveChanges(true);
     onloadRed();
+  
+    
   }
   
   async function onloadRed(){
@@ -85,8 +86,14 @@ function resetDefaults(){
     cookieList[x].stateName(Number(cookieList[x].baseVal));
   }
   setToastText("Changes Reset");
-
+ 
 }
+useEffect(() => {
+  if (changes == true){
+    handleChanges();
+  }
+});
+
 function handleChange(event : any, parent : Dispatch<SetStateAction<number>>){
   parent(Number(event.target.value));
   
@@ -114,6 +121,7 @@ function delay(ms: number) {
               onChange={(event: any) => handleCutoff(event)}
               className="custom-number-input px-4 py-2 border border-gray-600 rounded-md bg-gray-100 text-white focus:outline-none focus:border-white-500 focus:ring-1 focus:ring-white-500"
               placeholder={String(cutoff)}
+              required
             ></input>
           </div>
           <div className="flex items-center justify-between my-2">
@@ -128,6 +136,7 @@ function delay(ms: number) {
               onChange={(event) => handleChange(event, setAuthIndex)}
               className="custom-number-input px-4 py-2 border border-gray-600 rounded-md bg-gray-100 text-white focus:outline-none focus:border-white-500 focus:ring-1 focus:ring-white-500"
               placeholder={String(cutoff)}
+              required
             ></input>
           </div>
           <div className="flex items-center justify-between my-2">
@@ -138,6 +147,7 @@ function delay(ms: number) {
               id="nameIndex-input"
               name="nameIndex-input"
               type="number"
+              required
               value={nameIndex}
               onChange={(event) => handleChange(event, setNameIndex)}
               className="custom-number-input px-4 py-2 border border-gray-600 rounded-md bg-gray-100 text-white focus:outline-none focus:border-white-500 focus:ring-1 focus:ring-white-500"
@@ -156,6 +166,7 @@ function delay(ms: number) {
               onChange={(event) => handleChange(event, setHrsIndex)}
               className="custom-number-input px-4 py-2 border border-gray-600 rounded-md bg-gray-100 text-white focus:outline-none focus:border-white-500 focus:ring-1 focus:ring-white-500"
               placeholder={String(cutoff)}
+              required
             ></input>
           </div>
           <button
