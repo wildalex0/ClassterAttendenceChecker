@@ -10,7 +10,7 @@ export default function About() {
     })
 
     async function onloadRed(){
-        await delay(1500);
+        await delay(100);
         window.location.replace("http://localhost:3000");    
     }
     function delay(ms: number) {
@@ -18,12 +18,14 @@ export default function About() {
     }
   return (
     
-    <main onLoadStart={() => alert('Loaded')}>
+    <main className="h-screen">
      
      <Navbar/>
-     <div className="container mx-auto">
+
+      <div className="container mx-auto h-full">
         <p>Seems like you've entered the wrong file type.</p>
       </div>
+      <FooterSection/>
     </main>
   );
 }

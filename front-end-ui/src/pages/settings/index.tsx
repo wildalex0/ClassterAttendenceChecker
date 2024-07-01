@@ -1,6 +1,7 @@
 import Navbar from "../navbar";
 import { useState, useEffect } from "react";
 import { getCookie, setCookie } from 'cookies-next';
+import FooterSection from "../footer";
 
 export default function Home() {
   const [cutoff, setCutoff] = useState(0);
@@ -37,11 +38,11 @@ function baseCookieSet(){
   }
   return (
     
-    <main>
+    <main className="h-screen">
      
      <Navbar/>
 
-      <div className="container mx-auto">
+      <div className="container mx-auto h-full">
         <div className="m-2 p-4 my-2 border-2 border-gray-900 rounded-xl">
            
         <div className="flex items-center justify-between my-2">
@@ -55,6 +56,7 @@ function baseCookieSet(){
         </div>
     
       </div>
+      <FooterSection/>
     </main>
   );
 

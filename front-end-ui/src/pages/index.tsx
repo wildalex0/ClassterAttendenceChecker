@@ -59,11 +59,11 @@ function handleError(){
 }
   return (
     
-    <main className="mainContent">
+    <main className="h-screen">
      
      <Navbar/>
 
-      <div className="container mx-auto">
+      <div className="container mx-auto h-full">
         <div className="m-4">
           <p className="text-2xl font-bold pb-5">Classter Attendence Calculator</p>
           <p className="text-xl font-semibold">What is this calculator used for?</p>
@@ -89,12 +89,13 @@ function handleError(){
         </div> 
       <p className="mb-4"><span className="font-semibold">Selected file:</span> {uploadName}</p>
        
-      
+      <input type="text" id="test05" name="test05" placeholder="Input Var"></input>
       <input type="submit" id="Sub" disabled={!uploaded} className={classNames("p-4 w-full border-2 rounded-lg  dark:border-gray-600  ",{ "text-gray-500 dark:bg-[#2e2e2e]":!uploaded, "cursor-pointer dark:hover:border-gray-500  dark:bg-[#212121] dark:hover:bg-[#121212] ":uploaded}) } ></input>
       </form>
       <p className="italic py-4 ">To Add: Dynamic Customisation to CSV reading, IE: <span className="font-bold">Setting rows read dynamically.</span>.</p>
       </div>
       </div>
+      <FooterSection/>
     </main>
   );
 }

@@ -42,11 +42,11 @@ export default function Home() {
     }
     return (
     
-    <main>
+        <main className="h-screen">
      
-     <Navbar/>
-
-      <div className="container mx-auto">
+        <Navbar/>
+   
+         <div className="container mx-auto h-full">
         <div className="m-2">
             {Object.entries(subList).map(([key, value]) => (
                 
@@ -60,6 +60,7 @@ export default function Home() {
         </div>
     
       </div>
+      <FooterSection/>
     </main>
   );
 
