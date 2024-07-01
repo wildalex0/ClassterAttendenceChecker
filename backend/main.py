@@ -15,7 +15,6 @@ subjectList = []
 folderList = ["AttendencePerDate", "TestUpload"]
 finalJson = {}
 #User defined Args (Default args are usually inputted & defined.)
-mainArgs = []
 class Subject():
     def __init__(self, subjectName, subjectId):
         self.subjectName = subjectName
@@ -55,9 +54,11 @@ def writeReport():
     json.dump(finalJson,open(path,'w'),indent=6)
   
 def processFile(file):
+    print(mainArgs)
+    authIndex = mainArgs[0]
+    nameIndex = mainArgs[1]
+    hrsIndex = mainArgs[2]
     try:
-        print(mainArgs)
-
         path = f"{app.config['UPLOAD_FOLDER']}/{file}"
         with open(path, 'r') as f:
             next(f)  # Skip the first line
@@ -70,10 +71,10 @@ def processFile(file):
                 }
                 line = line.replace('"', '').rstrip('\n')
                 mainList = line.split(',')
-                if mainList[1] == "Authorised":
+                if mainList[authIndex] == "Authorised":
                     instanceData['Present'] = True
                 
-                nameList = mainList[4]
+                nameList = mainList[nameIndex]
                 nameList = nameList.replace(nameList[0],"",1).split('|')
                 if not subjectList:  # Checking if subjectList is empty
                     sub = Subject(nameList[1], nameList[0])
@@ -97,7 +98,7 @@ def processFile(file):
                         instanceData['SubId'] = nameList[0]
                         instanceData['Subindex'] = len(subjectList)-1
                 
-                instanceData['HourAmount'] = int(line[9])
+                instanceData['HourAmount'] = int(line[hrsIndex])
                 if instanceData['Present']:
                     subjectList[instanceData['Subindex']].addAttended(instanceData['HourAmount'])
                 else:
@@ -130,12 +131,14 @@ def readInstanceCounter():
         return fileCont
 def appendArgs(args):
     y = args.split('-')
-    tp = []
+    global mainArgs
+    mainArgs = []
     for x in y:
         mainArgs.append(int(x))
-        mainArgs = tp
-    if(len(mainArgs) != 3):
-        mainArgs = [1,4,9]      
+    if (len(mainArgs) != 3):
+        mainArgs = [1,4,9]
+
+        
 
     
 def setInstanceCounter():
@@ -169,7 +172,7 @@ def returnJSON():
 def mainProcessingAPI():
     if request.method == 'POST':
         checkFolderStruct()
-        #appendArgs(request.form['args'])
+        appendArgs(request.form['args'])
         # check if the post request has the file part
         if 'file' not in request.files:
             flash('No file part')
