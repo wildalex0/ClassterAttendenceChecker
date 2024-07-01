@@ -5,7 +5,6 @@ import { getCookie, setCookie } from 'cookies-next';
 
 export default function Home() {
     const[subList, setSubList] = useState({});
-    const[parseList, setParseList] = useState({});
     const[cutoffCoef, setCutoff] = useState(70);
     
     useEffect(() => {

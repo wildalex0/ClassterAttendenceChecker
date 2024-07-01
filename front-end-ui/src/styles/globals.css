@@ -40,3 +40,16 @@ body {
     -moz-appearance: textfield;
 }
 
+@keyframes fadeIn{
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes fadeOut{
+  from {opacity: 1;}
+  to {opacity: 0;}
+}
+
+#toast-default {
+  animation: fadeIn 0.5s ease-in forwards, fadeOut 0.5s ease-out forwards 2.5s;
+}

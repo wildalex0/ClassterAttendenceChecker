@@ -2,11 +2,13 @@ import Navbar from "../navbar";
 import { useState, useEffect } from "react";
 import { getCookie, setCookie } from "cookies-next";
 import FooterSection from "../footer";
-
+import classNames from "classnames";
 export default function Home() {
   const [cutoff, setCutoff] = useState(0);
   const [changes, setChanges] = useState(false);
+  const [saveChanges, setSaveChanges] = useState(false)
   useEffect(() => {
+    console.log(saveChanges);
     baseCookieSet();
   }, []);
 
@@ -33,8 +35,17 @@ export default function Home() {
   function handleChanges() {
     setCookie("ClassterAttendenceCoef", cutoff);
     setChanges(false);
-    window.location.reload();
+    setSaveChanges(true);
+    
+    onloadRed();
   }
+  async function onloadRed(){
+    await delay(3100);
+    window.location.reload();
+}
+function delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+}
   return (
     <main className="h-screen">
       <Navbar />
@@ -69,7 +80,7 @@ export default function Home() {
 
         <div
           id="toast-default"
-          className="flex m-auto justify=center items-center w-full max-w-xl p-4 text-gray-500 bg-white rounded-lg shadow dark:text-white-100 dark:bg-gray-100"
+          className={classNames("flex m-auto justify=center items-center w-full max-w-xl p-4 text-gray-500 bg-white rounded-lg shadow dark:text-white-100 dark:bg-gray-100", {"hidden": !saveChanges})}
           role="alert"
         >
           <div className="inline-flex items-center border-1 rounded-lg  dark:bg-gray-600 dark:text-gray-100 dark:border-gray-600 justify-center flex-shrink-0 w-8 h-8 rounded-lg">
@@ -87,9 +98,10 @@ export default function Home() {
           <div className="ms-3 text-md font-normal">Changes Saved</div>
           <button
             type="button"
-            className="ms-auto -mx-1.5 -my-1.5 items-center border-1 rounded-lg  dark:bg-gray-600 dark:text-gray-100 dark:border-gray-600 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
+            className="ms-auto -mx-1.5 -my-1.5 items-center border-1 rounded-lg  dark:bg-gray-600 dark:text-gray-100 dark:border-gray-600 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-white-100 dark:hover:text-white dark:bg-gray-100 dark:hover:bg-gray-700"
             data-dismiss-target="#toast-default"
             aria-label="Close"
+            onClick={() => setSaveChanges(false)}
           >
             <span className="sr-only">Close</span>
             <svg
