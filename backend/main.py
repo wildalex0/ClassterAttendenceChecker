@@ -14,6 +14,8 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 subjectList = []
 folderList = ["AttendencePerDate", "TestUpload"]
 finalJson = {}
+#User defined Args (Default args are usually inputted & defined.)
+mainArgs = []
 class Subject():
     def __init__(self, subjectName, subjectId):
         self.subjectName = subjectName
@@ -51,55 +53,61 @@ def writeReport():
     date = datetime.datetime.now()
     path = f"{os.path.join(os.path.dirname(os.path.abspath(__file__)))}/AttendencePerDate/{date.day}-{date.month}-{date.year}-{readInstanceCounter()}.json"
     json.dump(finalJson,open(path,'w'),indent=6)
-    
+  
 def processFile(file):
-    path = f"{app.config['UPLOAD_FOLDER']}/{file}"
-    with open(path, 'r') as f:
-        next(f)  # Skip the first line
-        for line in f:
-            instanceData = {
-                "Present": False,
-                "subCreated": False,
-                "HourAmount": 0,
-                "Subindex" : -1
-            }
-            line = line.replace('"', '').rstrip('\n')
-            mainList = line.split(',')
-            if mainList[1] == "Authorised":
-                instanceData['Present'] = True
-            
-            nameList = mainList[4]
-            nameList = nameList.replace(nameList[0],"",1).split('|')
-            if not subjectList:  # Checking if subjectList is empty
-                sub = Subject(nameList[1], nameList[0])
-                subjectList.append(sub)
-                instanceData['SubFound'] = nameList[1]
-                instanceData['SubId'] = nameList[0]
-                instanceData['Subindex'] = 0
-            else:
-                found = False
-                index = -1
-                for name in subjectList:
-                    index += 1
-                    if name.compareName(nameList[1]) == True:
-                        instanceData['Subindex'] = index
-                        found = True
-                        break
-                if not found:  # If the name was not found in subjectList
+    try:
+        path = f"{app.config['UPLOAD_FOLDER']}/{file}"
+        with open(path, 'r') as f:
+            next(f)  # Skip the first line
+            for line in f:
+                instanceData = {
+                    "Present": False,
+                    "subCreated": False,
+                    "HourAmount": 0,
+                    "Subindex" : -1
+                }
+                line = line.replace('"', '').rstrip('\n')
+                mainList = line.split(',')
+                if mainList[1] == "Authorised":
+                    instanceData['Present'] = True
+                
+                nameList = mainList[4]
+                nameList = nameList.replace(nameList[0],"",1).split('|')
+                if not subjectList:  # Checking if subjectList is empty
                     sub = Subject(nameList[1], nameList[0])
                     subjectList.append(sub)
-                    instanceData['SubName'] = nameList[1]
+                    instanceData['SubFound'] = nameList[1]
                     instanceData['SubId'] = nameList[0]
-                    instanceData['Subindex'] = len(subjectList)-1
-            instanceData['HourAmount'] = int(line[9])
-            if instanceData['Present']:
-                subjectList[instanceData['Subindex']].addAttended(instanceData['HourAmount'])
-            else:
-                subjectList[instanceData['Subindex']].addMissed(instanceData['HourAmount'])
-    for x in subjectList:
-        rp = x.returnReport()
-        finalJson.update({rp[0] : rp[1]})
-    writeReport()    
+                    instanceData['Subindex'] = 0
+                else:
+                    found = False
+                    index = -1
+                    for name in subjectList:
+                        index += 1
+                        if name.compareName(nameList[1]) == True:
+                            instanceData['Subindex'] = index
+                            found = True
+                            break
+                    if not found:  # If the name was not found in subjectList
+                        sub = Subject(nameList[1], nameList[0])
+                        subjectList.append(sub)
+                        instanceData['SubName'] = nameList[1]
+                        instanceData['SubId'] = nameList[0]
+                        instanceData['Subindex'] = len(subjectList)-1
+                
+                instanceData['HourAmount'] = int(line[9])
+                if instanceData['Present']:
+                    subjectList[instanceData['Subindex']].addAttended(instanceData['HourAmount'])
+                else:
+                    subjectList[instanceData['Subindex']].addMissed(instanceData['HourAmount'])
+        for x in subjectList:
+            rp = x.returnReport()
+            finalJson.update({rp[0] : rp[1]})
+        writeReport()
+        return(1)
+    except:
+        print("Error Found")
+        return(0)
 def processRow(row):
     counter = 0
     for x in row:
@@ -162,8 +170,8 @@ def mainProcessingAPI():
         if file and allowed_file(file.filename):
             filename = f"{setInstanceCounter()}_{secure_filename(file.filename)}"
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            processFile(filename)
-
+            if(processFile(filename) == 0):
+                return redirect("http://localhost:3000/error")
             return redirect("http://localhost:3000/result")
         else:
             response = make_response(redirect("http://localhost:3000/error"))

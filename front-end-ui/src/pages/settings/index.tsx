@@ -7,6 +7,7 @@ export default function Home() {
   const [cutoff, setCutoff] = useState(0);
   const [changes, setChanges] = useState(false);
   const [saveChanges, setSaveChanges] = useState(false)
+  const [toastText, setToastText] = useState("Changes Saved");
   useEffect(() => {
     console.log(saveChanges);
     baseCookieSet();
@@ -33,16 +34,29 @@ export default function Home() {
     }
   }
   function handleChanges() {
+    console.log(cutoff)
     setCookie("ClassterAttendenceCoef", cutoff);
     setChanges(false);
     setSaveChanges(true);
-    
     onloadRed();
   }
+  
   async function onloadRed(){
     await delay(3100);
     window.location.reload();
 }
+function resetDefaults(){
+  setChanges(true);
+  setCutoff(70);
+  setToastText("Changes Reset")
+
+}
+useEffect(() => {
+  if (cutoff === 70 && changes) {
+    handleChanges();
+  }
+}, [cutoff, changes]);
+
 function delay(ms: number) {
     return new Promise( resolve => setTimeout(resolve, ms) );
 }
@@ -76,6 +90,16 @@ function delay(ms: number) {
           >
             Save Changes
           </button>
+          <button
+            id="resetDefaults"
+           
+            onClick={resetDefaults}
+            className={
+              "mt-4 p-4 w-full border-2 rounded-lg  dark:border-gray-600 cursor-pointer dark:hover:border-gray-500  dark:bg-[#212121] dark:hover:bg-[#121212] "
+            }
+          >
+            Reset to Defaults
+          </button>
         </div>
             
         <div
@@ -95,7 +119,7 @@ function delay(ms: number) {
               <path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z" />
             </svg>
           </div>
-          <div className="ms-3 text-md font-normal">Changes Saved</div>
+          <div className="ms-3 text-md font-normal">{toastText}</div>
           <button
             type="button"
             className="ms-auto -mx-1.5 -my-1.5 items-center border-1 rounded-lg  dark:bg-gray-600 dark:text-gray-100 dark:border-gray-600 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-white-100 dark:hover:text-white dark:bg-gray-100 dark:hover:bg-gray-700"
