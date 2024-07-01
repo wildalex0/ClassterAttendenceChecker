@@ -77,7 +77,7 @@ function delay(ms: number) {
             Save Changes
           </button>
         </div>
-
+            
         <div
           id="toast-default"
           className={classNames("flex m-auto justify=center items-center w-full max-w-xl p-4 text-gray-500 bg-white rounded-lg shadow dark:text-white-100 dark:bg-gray-100", {"hidden": !saveChanges})}
