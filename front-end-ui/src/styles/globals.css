@@ -53,3 +53,10 @@ body {
 #toast-default {
   animation: fadeIn 0.5s ease-in forwards, fadeOut 0.5s ease-out forwards 2.5s;
 }
+.ErrorBackground {
+  background-image: url('../pages/error/sadgeLight.png');
+  background-size: 70vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+}

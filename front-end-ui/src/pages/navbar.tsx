@@ -23,20 +23,9 @@ export default function Navbar() {
   };
 
   return (
-    <div className="bg-[#121212] w-full p-4 text-white">
+    <div className="bg-[#121212] w-full p-4 text-white sticky top-0">
       <div className="container mx-auto flex justify-between items-center">
-        <div>
-          <h1 className="text-3xl">
-            <a
-              className="link-underline link-underline-black"
-              href="/"
-              target=""
-              rel="noreferrer"
-            >
-              Meow
-            </a>
-          </h1>
-        </div>
+        
 
         <ul className="hidden md:flex">
           {links.map((item) => (
@@ -48,7 +37,7 @@ export default function Navbar() {
             </li>
           ))}
         </ul>
-
+          <div className="md:hidden "></div>
         <div className="md:hidden  hover:scale-105" onClick={toggleNav}>
           {nav ? <FaTimes size={30} /> : <FaBars size={30} />}
         </div>

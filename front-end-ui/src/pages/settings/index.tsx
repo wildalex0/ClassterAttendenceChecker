@@ -119,7 +119,7 @@ function delay(ms: number) {
               type="number"
               value={cutoff}
               onChange={(event: any) => handleCutoff(event)}
-              className="custom-number-input px-4 py-2 border border-gray-600 rounded-md bg-gray-900 text-white focus:outline-none focus:border-white-500 focus:ring-1 focus:ring-white-500"
+              className="custom-number-input px-4 py-2 border border-gray-600 rounded-md bg-gray-100 text-white focus:outline-none focus:border-white-500 focus:ring-1 focus:ring-white-500"
               placeholder={String(cutoff)}
               required
             ></input>
@@ -134,7 +134,7 @@ function delay(ms: number) {
               type="number"
               value={authIndex}
               onChange={(event) => handleChange(event, setAuthIndex)}
-              className="custom-number-input px-4 py-2 border border-gray-600 rounded-md bg-gray-900 text-white focus:outline-none focus:border-white-500 focus:ring-1 focus:ring-white-500"
+              className="custom-number-input px-4 py-2 border border-gray-600 rounded-md bg-gray-100 text-white focus:outline-none focus:border-white-500 focus:ring-1 focus:ring-white-500"
               placeholder={String(cutoff)}
               required
             ></input>
@@ -150,7 +150,7 @@ function delay(ms: number) {
               required
               value={nameIndex}
               onChange={(event) => handleChange(event, setNameIndex)}
-              className="custom-number-input px-4 py-2 border border-gray-600 rounded-md bg-gray-900 text-white focus:outline-none focus:border-white-500 focus:ring-1 focus:ring-white-500"
+              className="custom-number-input px-4 py-2 border border-gray-600 rounded-md bg-gray-100 text-white focus:outline-none focus:border-white-500 focus:ring-1 focus:ring-white-500"
               placeholder={String(cutoff)}
             ></input>
           </div>
@@ -164,7 +164,7 @@ function delay(ms: number) {
               type="number"
               value={hrsIndex}
               onChange={(event) => handleChange(event, setHrsIndex)}
-              className="custom-number-input px-4 py-2 border border-gray-600 rounded-md bg-gray-900 text-white focus:outline-none focus:border-white-500 focus:ring-1 focus:ring-white-500"
+              className="custom-number-input px-4 py-2 border border-gray-600 rounded-md bg-gray-100 text-white focus:outline-none focus:border-white-500 focus:ring-1 focus:ring-white-500"
               placeholder={String(cutoff)}
               required
             ></input>
