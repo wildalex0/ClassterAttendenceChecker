@@ -119,7 +119,7 @@ function delay(ms: number) {
               type="number"
               value={cutoff}
               onChange={(event: any) => handleCutoff(event)}
-              className="custom-number-input px-4 py-2 border border-gray-600 rounded-md bg-gray-100 text-white focus:outline-none focus:border-white-500 focus:ring-1 focus:ring-white-500"
+              className="custom-number-input px-4 py-2 border border-gray-600 rounded-md bg-gray-900 text-white focus:outline-none focus:border-white-500 focus:ring-1 focus:ring-white-500"
               placeholder={String(cutoff)}
               required
             ></input>
@@ -134,7 +134,7 @@ function delay(ms: number) {
               type="number"
               value={authIndex}
               onChange={(event) => handleChange(event, setAuthIndex)}
-              className="custom-number-input px-4 py-2 border border-gray-600 rounded-md bg-gray-100 text-white focus:outline-none focus:border-white-500 focus:ring-1 focus:ring-white-500"
+              className="custom-number-input px-4 py-2 border border-gray-600 rounded-md bg-gray-900 text-white focus:outline-none focus:border-white-500 focus:ring-1 focus:ring-white-500"
               placeholder={String(cutoff)}
               required
             ></input>
@@ -150,7 +150,7 @@ function delay(ms: number) {
               required
               value={nameIndex}
               onChange={(event) => handleChange(event, setNameIndex)}
-              className="custom-number-input px-4 py-2 border border-gray-600 rounded-md bg-gray-100 text-white focus:outline-none focus:border-white-500 focus:ring-1 focus:ring-white-500"
+              className="custom-number-input px-4 py-2 border border-gray-600 rounded-md bg-gray-900 text-white focus:outline-none focus:border-white-500 focus:ring-1 focus:ring-white-500"
               placeholder={String(cutoff)}
             ></input>
           </div>
@@ -164,7 +164,7 @@ function delay(ms: number) {
               type="number"
               value={hrsIndex}
               onChange={(event) => handleChange(event, setHrsIndex)}
-              className="custom-number-input px-4 py-2 border border-gray-600 rounded-md bg-gray-100 text-white focus:outline-none focus:border-white-500 focus:ring-1 focus:ring-white-500"
+              className="custom-number-input px-4 py-2 border border-gray-600 rounded-md bg-gray-900 text-white focus:outline-none focus:border-white-500 focus:ring-1 focus:ring-white-500"
               placeholder={String(cutoff)}
               required
             ></input>
@@ -192,7 +192,7 @@ function delay(ms: number) {
             
         <div
           id="toast-default"
-          className={classNames("flex m-auto justify=center items-center w-full max-w-xl p-4 text-gray-500 bg-white rounded-lg shadow dark:text-white-100 dark:bg-gray-100", {"hidden": !saveChanges})}
+          className={classNames("flex m-auto justify=center items-center w-full max-w-xl p-4 text-gray-500 bg-white rounded-lg shadow dark:text-white-100 dark:bg-gray-900", {"hidden": !saveChanges})}
           role="alert"
         >
           <div className="inline-flex items-center border-1 rounded-lg  dark:bg-gray-600 dark:text-gray-100 dark:border-gray-600 justify-center flex-shrink-0 w-8 h-8 rounded-lg">
