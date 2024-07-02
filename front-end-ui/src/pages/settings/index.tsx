@@ -192,7 +192,7 @@ function delay(ms: number) {
             
         <div
           id="toast-default"
-          className={classNames("flex m-auto justify=center items-center w-full max-w-xl p-4 text-gray-500 bg-white rounded-lg shadow dark:text-white-100 dark:bg-gray-900", {"hidden": !saveChanges})}
+          className={classNames("flex m-auto justify=center items-center w-full max-w-xl p-4 text-gray-500 bg-white rounded-lg shadow dark:text-white-100 dark:bg-gray-100", {"hidden": !saveChanges})}
           role="alert"
         >
           <div className="inline-flex items-center border-1 rounded-lg  dark:bg-gray-600 dark:text-gray-100 dark:border-gray-600 justify-center flex-shrink-0 w-8 h-8 rounded-lg">

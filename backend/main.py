@@ -98,7 +98,7 @@ def processFile(file):
                         instanceData['SubId'] = nameList[0]
                         instanceData['Subindex'] = len(subjectList)-1
                 
-                instanceData['HourAmount'] = int(line[hrsIndex])
+                instanceData['HourAmount'] = float(mainList[hrsIndex])
                 if instanceData['Present']:
                     subjectList[instanceData['Subindex']].addAttended(instanceData['HourAmount'])
                 else:
@@ -108,8 +108,8 @@ def processFile(file):
             finalJson.update({rp[0] : rp[1]})
         writeReport()
         return(1)
-    except:
-        print("Error Found")
+    except Exception as error:
+        print("An error occurred:", type(error).__name__, "–", error)
         return(0)
 def processRow(row):
     counter = 0
@@ -178,14 +178,17 @@ def mainProcessingAPI():
             flash('No file part')
             return ('Please Enter A file')
         file = request.files['file']
+        print(file)
         print(file.filename)
-        if file and allowed_file(file.filename):
+        if file :
             filename = f"{setInstanceCounter()}_{secure_filename(file.filename)}"
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             if(processFile(filename) == 0):
+                print("nah")
                 return redirect("http://localhost:3000/error")
             return redirect("http://localhost:3000/result")
         else:
+            print("mahoraga")
             response = make_response(redirect("http://localhost:3000/error"))
             response.headers["Refresh"] = "3; url=http://localhost:3000"
             return response

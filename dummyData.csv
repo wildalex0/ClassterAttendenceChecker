@@ -1,22 +1,26 @@
-﻿Class,Type,Category,Notes,Regards,Lecturer,Date,Time,Number,Session hours,Course
-{INPUT CLASS},Authorised,Present,,CDKSK-406-2000 | Class Name 1,{INPUT LECTURER NAME},31/05/2024,10:30-11:00,2,2,{INPUT COURSE NAME}
-{INPUT CLASS},Authorised,Excused,,CDKSK-406-2000 | Class Name 2,{INPUT LECTURER NAME},31/05/2024,12:30-13:00,1,1,{INPUT COURSE NAME}
-{INPUT CLASS},Authorised,Present,,ITSFT-406-2001 | Class Name 3,{INPUT LECTURER NAME},30/05/2024,09:00-09:30,2,2,{INPUT COURSE NAME}
-{INPUT CLASS},Unauthorized,Unknown Reason,,CDKSK-406-2000 | Class Name 1,{INPUT LECTURER NAME},30/05/2024,13:00-13:30,2,2,{INPUT COURSE NAME}
-{INPUT CLASS},Authorised,Not Required,,CDKSK-406-2000 | Class Name 2,{INPUT LECTURER NAME},30/05/2024,11:00-11:30,1.5,1.5,{INPUT COURSE NAME}
-{INPUT CLASS},Authorised,Present,,ITSFT-406-2001 | Class Name 3,{INPUT LECTURER NAME},28/05/2024,14:00-14:30,1.5,1.5,{INPUT COURSE NAME}
-{INPUT CLASS},Authorised,Present,,CDKSK-406-2000 | Class Name 1,{INPUT LECTURER NAME},28/05/2024,12:00-12:30,2,2,{INPUT COURSE NAME}
-{INPUT CLASS},Unauthorized,Unknown Reason,,CDKSK-406-2000 | Class Name 2,{INPUT LECTURER NAME},28/05/2024,10:30-11:00,1.5,1.5,{INPUT COURSE NAME}
-{INPUT CLASS},Authorised,Excused,,ITSFT-406-2001 | Class Name 3,{INPUT LECTURER NAME},28/05/2024,09:30-10:00,1,1,{INPUT COURSE NAME}
-{INPUT CLASS},Unauthorized,Unknown Reason,,CDKSK-406-2000 | Class Name 1,{INPUT LECTURER NAME},24/05/2024,12:30-13:00,1,1,{INPUT COURSE NAME}
-{INPUT CLASS},Authorised,Present,,CDKSK-406-2000 | Class Name 2,{INPUT LECTURER NAME},24/05/2024,10:30-11:00,2,2,{INPUT COURSE NAME}
-{INPUT CLASS},Unauthorized,Unknown Reason,,ITSFT-406-2001 | Class Name 3,{INPUT LECTURER NAME},23/05/2024,13:00-13:30,2,2,{INPUT COURSE NAME}
-{INPUT CLASS},Unauthorized,Unknown Reason,,CDKSK-406-2000 | Class Name 1,{INPUT LECTURER NAME},23/05/2024,11:00-11:30,1.5,1.5,{INPUT COURSE NAME}
-{INPUT CLASS},Authorised,Present,,CDKSK-406-2000 | Class Name 2,{INPUT LECTURER NAME},21/05/2024,14:00-14:30,1.5,1.5,{INPUT COURSE NAME}
-{INPUT CLASS},Authorised,Present,,ITSFT-406-2001 | Class Name 3,{INPUT LECTURER NAME},21/05/2024,12:00-12:30,2,2,{INPUT COURSE NAME}
-{INPUT CLASS},Authorised,Present,,CDKSK-406-2000 | Class Name 1,{INPUT LECTURER NAME},21/05/2024,10:30-11:00,1.5,1.5,{INPUT COURSE NAME}
-{INPUT CLASS},Authorised,Excused,,CDKSK-406-2000 | Class Name 2,{INPUT LECTURER NAME},21/05/2024,09:30-10:00,1,1,{INPUT COURSE NAME}
-{INPUT CLASS},Authorised,Present,,ITSFT-406-2001 | Class Name 3,{INPUT LECTURER NAME},21/05/2024,08:00-08:30,1.5,1.5,{INPUT COURSE NAME}
-{INPUT CLASS},Authorised,Present,,CDKSK-406-2000 | Class Name 1,{INPUT LECTURER NAME},17/05/2024,12:30-13:00,1.5,1.5,{INPUT COURSE NAME}
-{INPUT CLASS},Authorised,Present,,CDKSK-406-2000 | Class Name 2,{INPUT LECTURER NAME},31/05/2024,10:30-11:01,1,1,{INPUT COURSE NAME}
-{INPUT CLASS},Authorised,Excused,,ITSFT-406-2001 | Class Name 3,{INPUT LECTURER NAME},31/05/2024,12:30-13:01,1.5,1.5,{INPUT COURSE NAME}
+﻿"Class","Type","Category","Notes","Regards","Lecturer","Date","Time","Number","Session hours","Course"
+"CLASS NAME","Authorised","Present","","XXX | Class One","Lecturer Name","31/05/2024","10:30-11:00","2.00","2.00","Course Name"
+"CLASS NAME","Authorised","Present","","XXX | Class One","Lecturer Name","31/05/2024","10:30-11:00","2.00","2.00","Course Name"
+"CLASS NAME","Authorised","Present","","XXX | Class One","Lecturer Name","31/05/2024","10:30-11:00","2.00","2.00","Course Name"
+"CLASS NAME","Authorised","Present","","XXX | Class One","Lecturer Name","31/05/2024","10:30-11:00","2.00","2.00","Course Name"
+"CLASS NAME","Authorised","Present","","XXX | Class One","Lecturer Name","31/05/2024","10:30-11:00","2.00","2.00","Course Name"
+"CLASS NAME","Authorised","Present","","XXX | Class One","Lecturer Name","31/05/2024","10:30-11:00","2.00","2.00","Course Name"
+"CLASS NAME","Authorised","Present","","XXX | Class One","Lecturer Name","31/05/2024","10:30-11:00","2.00","2.00","Course Name"
+"CLASS NAME","Authorised","Present","","XXX | Class One","Lecturer Name","31/05/2024","10:30-11:00","2.00","2.00","Course Name"
+"CLASS NAME","Authorised","Present","","XXX | Class One","Lecturer Name","31/05/2024","10:30-11:00","2.00","2.00","Course Name"
+"CLASS NAME","Authorised","Present","","XXX | Class One","Lecturer Name","31/05/2024","10:30-11:00","2.00","2.00","Course Name"
+"CLASS NAME","Authorised","Present","","XXX | Class One","Lecturer Name","31/05/2024","10:30-11:00","2.00","2.00","Course Name"
+"CLASS NAME","Unauthorized","Present","","XXX | Class One","Lecturer Name","31/05/2024","10:30-11:00","2.00","2.00","Course Name"
+"CLASS NAME","Unauthorized","Present","","XXX | Class One","Lecturer Name","31/05/2024","10:30-11:00","2.00","2.00","Course Name"
+"CLASS NAME","Authorised","Present","","XXX | Class Two","Lecturer Name","31/05/2024","10:30-11:00","2.00","2.00","Course Name"
+"CLASS NAME","Authorised","Present","","XXX | Class Two","Lecturer Name","31/05/2024","10:30-11:00","2.00","2.00","Course Name"
+"CLASS NAME","Authorised","Present","","XXX | Class Two","Lecturer Name","31/05/2024","10:30-11:00","2.00","2.00","Course Name"
+"CLASS NAME","Authorised","Present","","XXX | Class Two","Lecturer Name","31/05/2024","10:30-11:00","2.00","2.00","Course Name"
+"CLASS NAME","Authorised","Present","","XXX | Class Two","Lecturer Name","31/05/2024","10:30-11:00","2.00","2.00","Course Name"
+"CLASS NAME","Authorised","Present","","XXX | Class Two","Lecturer Name","31/05/2024","10:30-11:00","2.00","2.00","Course Name"
+"CLASS NAME","Authorised","Present","","XXX | Class Three","Lecturer Name","31/05/2024","10:30-11:00","2.00","2.00","Course Name"
+"CLASS NAME","Unauthorized","Present","","XXX | Class Three","Lecturer Name","31/05/2024","10:30-11:00","2.00","2.00","Course Name"
+"CLASS NAME","Unauthorized","Present","","XXX | Class Three","Lecturer Name","31/05/2024","10:30-11:00","2.00","2.00","Course Name"
+"CLASS NAME","Unauthorized","Present","","XXX | Class Three","Lecturer Name","31/05/2024","10:30-11:00","2.00","2.00","Course Name"
+"CLASS NAME","Unauthorized","Present","","XXX | Class Three","Lecturer Name","31/05/2024","10:30-11:00","2.00","2.00","Course Name"
+"CLASS NAME","Authorised","Present","","XXX | Class Three","Lecturer Name","31/05/2024","10:30-11:00","2.00","2.00","Course Name"
