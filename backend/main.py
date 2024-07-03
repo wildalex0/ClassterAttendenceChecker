@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash, redirect, make_response
+from flask import Flask, session, request, flash, redirect, make_response
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
 import os
@@ -54,10 +54,10 @@ def writeReport():
     json.dump(finalJson,open(path,'w'),indent=6)
   
 def processFile(file):
-    print(mainArgs)
     authIndex = mainArgs[0]
     nameIndex = mainArgs[1]
     hrsIndex = mainArgs[2]
+    
     try:
         path = f"{app.config['UPLOAD_FOLDER']}/{file}"
         with open(path, 'r') as f:
@@ -105,6 +105,9 @@ def processFile(file):
                     subjectList[instanceData['Subindex']].addMissed(instanceData['HourAmount'])
         for x in subjectList:
             rp = x.returnReport()
+            print(finalJson)
+            print(rp)
+
             finalJson.update({rp[0] : rp[1]})
         writeReport()
         return(1)
@@ -146,7 +149,7 @@ def setInstanceCounter():
     print(f"{fileCont} - {type(fileCont)}")
     fileCont+=1 
     fileCont = str(fileCont)
-    open('instanceCounter.txt','w').write(fileCont)
+    open(os.path.join(os.path.dirname(os.path.abspath(__file__)),'instanceCounter.txt'),'w').write(fileCont)
     return fileCont
 def checkFolderStruct():
     currentPath = os.path.dirname(os.path.abspath(__file__))
@@ -184,11 +187,9 @@ def mainProcessingAPI():
             filename = f"{setInstanceCounter()}_{secure_filename(file.filename)}"
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             if(processFile(filename) == 0):
-                print("nah")
                 return redirect("http://localhost:3000/error")
             return redirect("http://localhost:3000/result")
         else:
-            print("mahoraga")
             response = make_response(redirect("http://localhost:3000/error"))
             response.headers["Refresh"] = "3; url=http://localhost:3000"
             return response

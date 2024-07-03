@@ -8,6 +8,7 @@ export default function Home() {
     const[cutoffCoef, setCutoff] = useState(70);
     
     useEffect(() => {
+        setSubList({})
         baseCookieSet()
         fetch("http://localhost:5000/fileAPI").then((response) => response.json())
     .then((data) => {

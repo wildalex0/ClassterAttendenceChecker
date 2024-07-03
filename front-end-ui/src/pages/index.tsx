@@ -3,7 +3,6 @@ import FooterSection from "./footer"
 import { useState, useEffect } from "react";
 import classNames from "classnames";
 import { getCookie, setCookie } from 'cookies-next';
- 
 export default function Home() {
 
   const [uploaded, setUpload] = useState(false);
@@ -60,6 +59,7 @@ export default function Home() {
 
   }
 
+
 function handleDrop(event: React.DragEvent<HTMLDivElement>){
   event.preventDefault();
   const file = event.dataTransfer.files?.[0];
@@ -67,6 +67,15 @@ function handleDrop(event: React.DragEvent<HTMLDivElement>){
     handleError();
   }
 
+}
+
+function handleDownload(){
+  const link = document.createElement('a');
+  link.href = 'dummyData.csv';
+  link.download = 'Template.csv';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
 }
 
 function handleDragover(event: React.DragEvent<HTMLDivElement>){
@@ -122,6 +131,25 @@ function handleError(){
       <input type="submit" id="Sub" disabled={!uploaded} className={classNames("p-4 w-full border-2 rounded-lg  dark:border-gray-600  ",{ "text-gray-500 dark:bg-[#2e2e2e]":!uploaded, "cursor-pointer dark:hover:border-gray-500  dark:bg-[#212121] dark:hover:bg-[#121212] ":uploaded}) } ></input>
       </form>
       <p className="italic py-4 ">To Add: Dynamic Customisation to CSV reading, IE: <span className="font-bold">Setting rows read dynamically.</span>.</p>
+      
+      <div
+          className={"flex justify-center items-center w-full max-w-md p-4 text-gray-500 bg-white rounded-lg shadow dark:text-white-100 dark:bg-gray-100"}
+        >
+
+          <div className=" text-md font-normal">Download <span className="font-semibold">Template Data</span></div>
+          <button
+            type="button"
+            className="ms-auto -mx-1.5 -my-1.5 items-center border-1 rounded-lg  dark:bg-gray-600 dark:text-gray-100 dark:border-gray-600 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-white-100 dark:hover:text-white dark:bg-gray-100 dark:hover:bg-gray-700"
+            data-dismiss-target="#toast-default"
+            aria-label="Close"
+            onClick={handleDownload}
+          >
+           <svg className="w-6 h-6 text-gray-800 dark:text-gray-100 dark:hover:text-white-100" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 15v2a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-2m-8 1V4m0 12-4-4m4 4 4-4"/>
+          </svg>
+
+          </button>
+        </div>
       </div>
       </div>
       <FooterSection/>
