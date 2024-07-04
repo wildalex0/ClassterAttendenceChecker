@@ -2,6 +2,8 @@
 
 **Can** be used with other portals too, assuming a the format in the Template provided is followed, or the settings in the UI is set accordingly.
 
+Feel free to use this project as you will, there are potential bugs that might be present, so please let me know and I'll do my best to improve upon it
+
 # Setting Up Project
 
 1. Have both Python 3.12 and Node downloaded
@@ -20,8 +22,6 @@
    python backend\main.py
    ```
 # Snapshots
-
-Feel free to use this project as you will, there are potential bugs that might be present, so please let me know
 
 **Home Screen**
 CSV can be uploaded in the template that is downloadable, or in a custom template. It is crucial that under present attendence, **Authorised** is written.
