@@ -7,9 +7,9 @@
 1. Have both Python 3.12 and Node downloaded
 
 2.  Run the following command:
-   ```
-   pip install -r backend\requirements.txt
-   ```
+      ```
+      pip install -r backend\requirements.txt
+      ```
 3. Run the following command, within the front-end-ui folder:
    ```
    npm install
